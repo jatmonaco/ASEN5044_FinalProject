@@ -3,7 +3,7 @@
 
 % physical paramters
 mu_A = 4.892e-9;            % [km^3/s^2]
-w_A = 4.296057;             % [hrs]
+w_A = 4.296057 * 60 * 60;   % [sec] rotation period
 r_S = [1.5e8,0,0]';         % [km]
 Phi_0 = 1e14;               % [kg km/s^2]
 rho = 0.4;                  % [--]
