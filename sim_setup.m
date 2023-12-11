@@ -8,7 +8,7 @@ r_S = [1.5e8,0,0]';         % [km]
 Phi_0 = 1e14;               % [kg km/s^2]
 rho = 0.4;                  % [--]
 A_M = (1/62)*1e-6;          % [km^2/kg]
-sig_m = 1e-9;               % [km/s^2]
+sig_w = 1e-9;               % [km/s^2]
 
 % camera parameters
 f = 2089.7959;              % [pixels]
