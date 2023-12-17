@@ -30,7 +30,7 @@ function y = y_measured(lp, x_nom, RNC, t,noise,check_vis)
     
     if check_vis == true
         % making sure object is within FOV
-        if u<0 || u>1024 || v<0 || v>1024 || (l-r)'*khat < 0
+        if u<0 || u>1024 || v<0 || v>1024 || ((l-r)'*khat < 0)
             u = NaN;
             v = NaN;
         end
