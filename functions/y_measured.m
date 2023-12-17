@@ -1,4 +1,4 @@
-function [u, v] = y_measured(lp, x_nom, RNC, t,noise,check_vis)
+function y = y_measured(lp, x_nom, RNC, t,noise,check_vis)
     % calculate pixel coordinate of SC
     
     % loading in simulation set-up paramters
@@ -41,4 +41,5 @@ function [u, v] = y_measured(lp, x_nom, RNC, t,noise,check_vis)
             v = NaN;
         end
     end
+    y = [u; v];
 end
