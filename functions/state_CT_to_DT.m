@@ -1,4 +1,4 @@
-function [F,G,w_k] = state_CT_to_DT(dt_obs,A,B,Gamma,W,seed)
+function [F,G,Q] = state_CT_to_DT(dt_obs,A,B,Gamma,W)
     % This takes the state evolution matrices of a stoccastic continuous-time 
     % linear system and returns its equivalent descritized matrices, e.g.: 
     %       \dot{X}(t) = A*X + B*u + Gamma*\Tilde{w}(t)
@@ -43,7 +43,7 @@ function [F,G,w_k] = state_CT_to_DT(dt_obs,A,B,Gamma,W,seed)
     Z(1:n,(n+1):end) = Gamma * W * Gamma';
     expm_Z = expm(Z*dt_obs);
     F = expm_Z((n+1):end,(n+1):end)';
-    Q_k = F * expm_Z(1:n,(n+1):end);
-    rng(seed);
-    w_k = mvnrnd(zeros(n,1),Q_k)';
+    Q = F * expm_Z(1:n,(n+1):end);
+    % rng(seed);
+    % w_k = mvnrnd(zeros(n,1),Q)';
 end
