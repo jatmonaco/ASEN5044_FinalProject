@@ -44,8 +44,8 @@ function y = y_measured(lp, x_nom, RNC, t,noise,check_vis)
     
     % adding noise 
     if noise==true
-        u = u + normrnd(0,sig_u^2);
-        v = v + normrnd(0,sig_v^2);
+        u = u + normrnd(0,sig_u);
+        v = v + normrnd(0,sig_v);
     end
     
     if check_vis == true
