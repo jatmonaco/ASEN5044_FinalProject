@@ -48,14 +48,14 @@ function y = y_measured(lp, x_nom, RNC, t,noise,check_vis)
         v = v + normrnd(0,sig_v);
     end
     
-    if check_vis == true
+    if check_vis
         % making sure object is within FOV
         if u<0 || u>1024 || v<0 || v>1024 || ((l-r)'*khat < 0)
             u = NaN;
             v = NaN;
         end
     
-            % if the asteriod occuludes the object, return with no observations
+        % if the asteriod occuludes the object, return with no observations
         if l'*khat > 0
             u = NaN;
             v = NaN;
