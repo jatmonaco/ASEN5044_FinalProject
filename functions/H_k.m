@@ -13,9 +13,12 @@ function H = H_k(lp,x_nom,t,RNC)
     
     % forming measurement observation matrix
     lr = (l-r); % column vector 
+    lr_i = lr'*ihat; 
+    lr_j = lr'*jhat; 
     lr_k = lr'*khat; % dot product of (l-r) and k
-    a1 = (f/lr_k/lr_k)*((lr.*khat) - (lr_k*ihat));  % column vector of dh1/dr
-    a2 = (f/lr_k/lr_k)*((lr.*khat) - (lr_k*jhat));  % column vector of dh2/dr
+
+    a1 = (f/lr_k/lr_k)*(khat*lr_i - ihat); % this is correct but we need to be able to show work
+    a2 = (f/lr_k/lr_k)*(khat*lr_j - jhat);
     H = [a1' 0 0 0; 
          a2' 0 0 0];
 end
