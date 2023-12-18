@@ -1,5 +1,7 @@
 function H = H_k(lp,x_nom,t,RNC)
-    load('sim_setup.mat', 'f')
+    % load('sim_setup.mat', 'f')
+    f = 2089.7959;              % [pixels]
+
     r = x_nom(1:3);     % position vector of SC
     R_NA = R_NA_t(t);   % rotation matrix for landmark 
     l = R_NA * lp;      % Convert landmark to asteriod inertial frame coords

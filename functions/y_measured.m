@@ -1,9 +1,29 @@
 function y = y_measured(lp, x_nom, RNC, t,noise,check_vis)
-    % calculate pixel coordinate of SC
+    % calculate pixel coordinate of SC. Returns y = [u;v].
+    %
+    % INPUTS:
+    %   - lp        Coordinates of the landmark in a asteroid-fixed,
+    %               asteroid-centered frame. 
+    %   - x_nom     The current state of the spacecraft
+    %   - RNC       The ADCS info/instrument coordinate positions
+    %   - t         Current time in seconds
+    %   - noise     Boolean. if 'true', adds expected noise.
+    %   - check_vis Boolean. if 'true', returns NaNs when the target is
+    %               occluded or out of frame.
+    %
+    % OUTPUTS:
+    %   - y         y = [u1;v1; ... u_n; v_n]
+    % 
+    % TODO:         Vectorize this better. Could make it so it takes many
+    %               target inputs and gives many outputs. 
     
     % loading in simulation set-up paramters
-    load('sim_setup.mat','u_0', 'v_0', 'f','sig_u','sig_v')
-    
+    f = 2089.7959;              % [pixels]
+    u_0 = 512;                  % [pixels]
+    v_0 = 512;                  % [pixels]
+    sig_u = 0.25;               % [pixels]
+    sig_v = 0.25;               % [pixels]    
+
     % getting coordinates of SC
     r = x_nom(1:3);
 

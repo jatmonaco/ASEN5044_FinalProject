@@ -44,6 +44,4 @@ function [F,G,Q] = state_CT_to_DT(dt_obs,A,B,Gamma,W)
     expm_Z = expm(Z*dt_obs);
     F = expm_Z((n+1):end,(n+1):end)';
     Q = F * expm_Z(1:n,(n+1):end);
-    % rng(seed);
-    % w_k = mvnrnd(zeros(n,1),Q)';
 end
