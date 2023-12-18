@@ -29,12 +29,13 @@ function [F,G,Q] = state_CT_to_DT(dt_obs,A,B,Gamma,W)
     % finding number of state variables and inputs
     [n,m] = size(B);
     
-    % converting to discrete time
+    % converting to discrete time via Van Loan's method
     A_hat = zeros(n+m,n+m);
     A_hat(1:n,1:n) = A;
     A_hat(1:n,(n+1):end) = B;
     exmp_A_hat = expm(A_hat*dt_obs);
     G = exmp_A_hat(1:n,(n+1):end);
+    F = exmp_A_hat(1:n,1:n);
 
     % Simulating noise 
     Z = zeros(n*2,n*2);
@@ -42,6 +43,6 @@ function [F,G,Q] = state_CT_to_DT(dt_obs,A,B,Gamma,W)
     Z((n+1):end,(n+1):end) = A';
     Z(1:n,(n+1):end) = Gamma * W * Gamma';
     expm_Z = expm(Z*dt_obs);
-    F = expm_Z((n+1):end,(n+1):end)';
-    Q = F * expm_Z(1:n,(n+1):end);
+    F_ = expm_Z((n+1):end,(n+1):end)';
+    Q = F_ * expm_Z(1:n,(n+1):end);
 end
