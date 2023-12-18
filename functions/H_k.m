@@ -17,8 +17,8 @@ function H = H_k(lp,x_nom,t,RNC)
     lr_j = lr'*jhat; 
     lr_k = lr'*khat; % dot product of (l-r) and k
 
-    a1 = (f/lr_k/lr_k)*(khat*lr_i - ihat); % this is correct but we need to be able to show work
-    a2 = (f/lr_k/lr_k)*(khat*lr_j - jhat);
+    a1 = (f/lr_k/lr_k)*(khat*lr_i - ihat*lr_k); % this is correct but we need to be able to show work
+    a2 = (f/lr_k/lr_k)*(khat*lr_j - jhat*lr_k);
     H = [a1' 0 0 0; 
          a2' 0 0 0];
 end
