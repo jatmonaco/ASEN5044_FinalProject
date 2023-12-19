@@ -1,4 +1,4 @@
-function [F,G,Q] = state_CT_to_DT(dt_obs,A,B,Gamma,W)
+function F = state_CT_to_DT_approx(dt_obs,A)
     % This takes the state evolution matrices of a stoccastic continuous-time 
     % linear system and returns its equivalent descritized matrices, e.g.: 
     %       \dot{X}(t) = A*X + B*u + Gamma*\Tilde{w}(t)
@@ -27,23 +27,6 @@ function [F,G,Q] = state_CT_to_DT(dt_obs,A,B,Gamma,W)
     %   - w_k       "           ". [n x 1] vector. 
 
     % finding number of state variables and inputs
-    [n,m] = size(B);
-    
-    % converting to discrete time via Van Loan's method
-    A_hat = zeros(n+m,n+m);
-    A_hat(1:n,1:n) = A;
-    A_hat(1:n,(n+1):end) = B;
-    exmp_A_hat = expm(A_hat*dt_obs);
-    G = exmp_A_hat(1:n,(n+1):end);
-    % F = exmp_A_hat(1:n,1:n);
-    F = expm(A*dt_obs);
-
-    % Simulating noise 
-    Z = zeros(n*2,n*2);
-    Z(1:n,1:n) = -A;
-    Z((n+1):end,(n+1):end) = A';
-    Z(1:n,(n+1):end) = Gamma * W * Gamma';
-    expm_Z = expm(Z*dt_obs);
-    F_ = expm_Z((n+1):end,(n+1):end)';
-    Q = F_ * expm_Z(1:n,(n+1):end);
+    [n,~] = size(A);
+    F = eye(n) + dt_obs * A;    
 end
